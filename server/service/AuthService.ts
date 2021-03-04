@@ -24,7 +24,8 @@ export const registerUser = async (username: string, password: string): Promise<
 
   if(checkExistUser) return {status: false, message: messages.userExist, data: []};
 
-  const user = await User.create({username, password});
+  const encryptPassword = bcrypt.hashSync(password, environment.BCRYPT_HASH);
+  const user = await User.create({username, password: encryptPassword});
   const token = jwt.sign({username: user.username}, environment.JWT_TOKEN);
 
   return {status: true, data: {token}, message: messages.registerSuccess};

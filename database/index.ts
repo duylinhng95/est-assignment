@@ -5,7 +5,10 @@ const databaseConnect = async () => {
   try {
     const host = environment.DATABASE_HOST;
     const port = environment.DATABASE_PORT;
-    const dbname = environment.DATABASE_NAME;
+    let dbname = environment.DATABASE_NAME;
+    if (process.env.NODE_ENV === 'test') {
+      dbname = 'test';
+    }
 
     const mongoURI: string = `mongodb://${host}:${port}/${dbname}`;
 

@@ -2,7 +2,7 @@ import {check} from 'express-validator';
 
 export const registerValidationRules = () => {
   return [
-      check('username').not().isEmpty().isString(),
-      check('password').not().isEmpty().isString()
+      check('username').trim().not().isEmpty().isString(),
+      check('password').trim().not().isEmpty().isString()
   ]
 }

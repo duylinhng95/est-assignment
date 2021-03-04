@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "module": "commonjs",
     "target": "es6",
-    "outDir": "./buiild",
+    "outDir": "./build",
     "rootDir": "./",
     "baseUrl": "./",
     "strict": true,
@@ -18,7 +19,7 @@
       "@Middleware/*": ["server/middleware/*"],
       "@RequestValidate/*": ["server/validate/*"],
       "@Test/*": ["test/*"],
-      "@Helper/*": ["server/helper/*"],
+      "@Helper/*": ["server/helper/*"]
     }
   },
   "include": ["./**/*", "test"],

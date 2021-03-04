@@ -8,10 +8,10 @@ const register = async (req: Request, res: Response) => {
   const {status, data, message} = await registerUser(params.username, params.password);
 
   if(!status) {
-    error(res, 401, message);
+    return error(res, 401, message);
   }
 
-  success(res, data);
+  return success(res, data);
 }
 
 export default {
