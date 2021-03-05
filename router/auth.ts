@@ -1,10 +1,12 @@
 import express from "express";
-import {registerValidationRules} from "@RequestValidate/AuthValidate";
+import {authenticateValidationRules} from "@RequestValidate/AuthValidate";
 import {validate} from "@Helper/validation";
 import AuthController from "@Controller/AuthController";
 
 const router = express.Router();
 
-router.post('/register', registerValidationRules(), validate, AuthController.register);
+router.post('/register', authenticateValidationRules(), validate, AuthController.register);
+
+router.post('/login', authenticateValidationRules(), validate, AuthController.login);
 
 export default router;

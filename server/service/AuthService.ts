@@ -10,7 +10,7 @@ export const loginUser = async (username: string, password: string): Promise<Ret
 
   if (!user) return {status: false, message: messages.invalidLogin, data: []};
 
-  const validatePassword = bcrypt.compare(password, user.password);
+  const validatePassword = await bcrypt.compare(password, user.password);
 
   if (!validatePassword) return {status: false, message: messages.invalidLogin, data: []};
 

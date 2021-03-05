@@ -1,5 +1,4 @@
-import {Document, Schema, model, Model} from 'mongoose'
-import {IUser} from "./User";
+import {Document, Schema, model, Model} from 'mongoose';
 
 export interface IEvent extends Document {
   eventName: string;
