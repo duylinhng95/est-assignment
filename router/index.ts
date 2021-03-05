@@ -1,12 +1,10 @@
 import express from "express";
 import auth from "./auth";
+import event from "./event";
 
 const router = express.Router();
 
-router.get('/test', (req,res,ext) => {
-  res.status(200).send('test');
-})
-
-router.use('/auth', auth)
+router.use('/auth', auth);
+router.use('/event', event);
 
 export default router;

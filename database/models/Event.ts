@@ -1,12 +1,10 @@
-import {Document, Schema, model, Model} from 'mongoose';
+import {Document, Schema, model} from 'mongoose';
 
 export interface IEvent extends Document {
   eventName: string;
   startDate: Date;
   dueDate: Date;
   description: string;
-  createdAt: Date;
-  updatedAt: Date;
   createdBy: string;
   updatedBy: string;
 }
@@ -28,13 +26,6 @@ const EventSchema: Schema = new Schema({
   description: {
     type: String
   },
-  createdAt: {
-    type: Date,
-    required: true
-  },
-  updatedAt: {
-    type: Date
-  },
   createdBy: {
     type: String,
     default: 'system'
@@ -42,8 +33,6 @@ const EventSchema: Schema = new Schema({
   updatedBy: {
     type: String
   }
-});
+}, {timestamps: true});
 
-const Event: Model<Document<IEvent>> = model('events', EventSchema);
-
-export default Event;
+export default model('events', EventSchema);
