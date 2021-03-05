@@ -6,6 +6,7 @@ import getAuthTokenFromApi from "@Helper/helper-test";
 
 const request = supertest(app);
 let authToken: string;
+let eventId: string;
 
 afterAll(async (done) => {
   await Event.deleteMany();
@@ -15,42 +16,32 @@ afterAll(async (done) => {
 
 beforeAll(async (done) => {
   authToken = await getAuthTokenFromApi(request);
+  const payload = {
+    eventName: 'test-edit-data',
+    startDate: '26-01-2021',
+    dueDate: '26-02-2021',
+    description: 'This event is for editing'
+  };
+
+  const res = await request.post('/event/create')
+      .auth(authToken, {type: 'bearer'})
+      .send(payload);
+
+  eventId = res.body.data._id;
   done()
 });
 
-describe('Event Create Test', () => {
-  it('Create without params', async done => {
-    const res = await request.post('/event/create')
-        .auth(authToken, { type: 'bearer' });
-
-    expect(res.status).toBe(401);
-    done()
-  });
-
-  it('Create with wrong format', async done => {
+describe('Event Edit Test', () => {
+    it('Edit success', async done => {
     const payload = {
-      eventName: 'test-create',
-      startDate: '2021-01-26',
-      dueDate: '30-12-2020'
-    };
-
-    const res = await request.post('/event/create')
-        .auth(authToken, { type: 'bearer' })
-        .send(payload);
-
-    expect(res.status).toBe(401);
-    done()
-  });
-
-  it('Create success', async done => {
-    const payload = {
+      _id: eventId,
       eventName: 'test-create-success',
       startDate: '26-01-2021',
-      dueDate: '26-02-2021',
-      description: 'This event should be created'
+      dueDate: '26-03-2021',
+      description: 'This description will be changed'
     };
 
-    const res = await request.post('/event/create')
+    const res = await request.put('/event/edit')
         .auth(authToken, {type: 'bearer'})
         .send(payload);
 

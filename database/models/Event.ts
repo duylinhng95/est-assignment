@@ -1,6 +1,7 @@
 import {Document, Schema, model} from 'mongoose';
 
 export interface IEvent extends Document {
+  _id: string;
   eventName: string;
   startDate: Date;
   dueDate: Date;

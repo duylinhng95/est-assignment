@@ -1,6 +1,6 @@
 export interface ReturnService {
   status: boolean,
   message: string;
-  data: object | object[];
+  data: any | any[];
   code?: number;
 }

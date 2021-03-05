@@ -17,8 +17,8 @@ afterAll(async (done) => {
 })
 
 const testUserPayload = {
-  username: 'test',
-  password: 'test'
+  username: 'testRegister',
+  password: 'testRegister'
 }
 
 describe('Register Test', () => {

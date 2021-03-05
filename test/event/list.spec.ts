@@ -2,8 +2,8 @@ import supertest from 'supertest';
 import app from "../../app";
 import Event from "@Model/Event";
 import mongoose from 'mongoose';
-import moment from "moment";
 import getAuthTokenFromApi from "@Helper/helper-test";
+import dayjs from "dayjs";
 
 const request = supertest(app);
 let authToken: string;
@@ -18,32 +18,32 @@ beforeAll(async (done) => {
   const eventTestListing = [
     {
       eventName: 'test1',
-      startDate: moment(),
-      dueDate: moment().add(1, 'month'),
+      startDate: dayjs(),
+      dueDate: dayjs().add(1, 'month'),
       description: 'test description 1',
     },
     {
       eventName: 'test2',
-      startDate: moment(),
-      dueDate: moment().add(1, 'month'),
+      startDate: dayjs(),
+      dueDate: dayjs().add(1, 'month'),
       description: 'test description 2',
     },
     {
       eventName: 'test3',
-      startDate: moment(),
-      dueDate: moment().add(1, 'month'),
+      startDate: dayjs(),
+      dueDate: dayjs().add(1, 'month'),
       description: 'test description 2',
     },
     {
       eventName: 'test4',
-      startDate: moment(),
-      dueDate: moment().add(1, 'month'),
+      startDate: dayjs(),
+      dueDate: dayjs().add(1, 'month'),
       description: 'test description 2',
     },
     {
       eventName: 'test5',
-      startDate: moment(),
-      dueDate: moment().add(1, 'month'),
+      startDate: dayjs(),
+      dueDate: dayjs().add(1, 'month'),
       description: 'test description 2',
     }
   ];

@@ -20,7 +20,7 @@ export const success = (res: Response, data: object | object[]) => {
   return res.status(200).send(response);
 }
 
-export const error = (res: Response, errorCode: number, message: string, errorData: object | object[] | null = null) => {
+export const error = (res: Response, message: string, errorCode: number | undefined = 500, errorData: object | object[] | null = null) => {
   const response: IResponse = {
     status: false,
     data: errorData,

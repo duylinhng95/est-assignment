@@ -8,7 +8,7 @@ const register = async (req: Request, res: Response) => {
   const {status, data, message} = await AuthService.registerUser(params.username, params.password);
 
   if(!status) {
-    return error(res, 401, message);
+    return error(res, message, 401);
   }
 
   return success(res, data);
@@ -19,7 +19,7 @@ const login = async (req: Request, res: Response) => {
 
   const {status, data, message} = await AuthService.loginUser(params.username, params.password);
   if (!status) {
-    return error(res, 401, message);
+    return error(res, message, 401);
   }
 
   return success(res, data);

@@ -12,5 +12,5 @@ export const validate = (req: Request, res: Response, next: NextFunction) => {
   const extractedErrors: object[] = [];
   errors.array().map((err: ValidationError) => extractedErrors.push({ [err.param]: err.msg }));
 
-  return error(res, 401, 'Invalid parameter', extractedErrors);
+  return error(res, 'Invalid parameter', 401, extractedErrors);
 }

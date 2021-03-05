@@ -14,20 +14,20 @@ afterAll(async (done) => {
 });
 
 beforeAll(async (done) => {
-  const testUser = await User.findOne({username: 'test'});
+  const testUser = await User.findOne({username: 'testLogin'});
 
   if (testUser) return;
 
-  const password = bcrypt.hashSync('test', environment.BCRYPT_HASH);
-  await User.create({username: 'test', password});
+  const password = bcrypt.hashSync('testLogin', environment.BCRYPT_HASH);
+  await User.create({username: 'testLogin', password});
   done()
 });
 
 describe('Login Test', () => {
   it('Login correct user', async done => {
     const payload = {
-      username: 'test',
-      password: 'test'
+      username: 'testLogin',
+      password: 'testLogin'
     }
     const res = await request.post('/auth/login').send(payload);
 
@@ -40,8 +40,8 @@ describe('Login Test', () => {
 
   it('Login wrong username', async done => {
     const testWrongUserNamePayload = {
-      username: 'test2',
-      password: 'test'
+      username: 'testLogin2',
+      password: 'testLogin'
     };
 
     const res = await request.post('/auth/login').send(testWrongUserNamePayload);
@@ -54,8 +54,8 @@ describe('Login Test', () => {
 
   it('Login wrong password', async done => {
     const testWrongPasswordPayload = {
-      username: 'test',
-      password: 'test2'
+      username: 'testLogin',
+      password: 'testLogin2'
     };
 
     const res = await request.post('/auth/login').send(testWrongPasswordPayload);
