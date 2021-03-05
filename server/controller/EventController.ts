@@ -1,5 +1,5 @@
 import {Request, Response} from 'express-serve-static-core';
-import {error, success} from "@Helper/response";
+import {error, success, systemError} from "@Helper/response";
 import EventService from "@Service/EventService";
 
 const list = async (req: Request, res: Response) => {
@@ -16,6 +16,18 @@ const list = async (req: Request, res: Response) => {
   return success(res, data);
 }
 
+const create = async(req: Request, res: Response) => {
+  const params = req.body;
+  const who = (req as any).auth;
+
+  const {status, data} = await EventService.createEvent(params, who);
+
+  if(!status) return systemError(res);
+
+  return success(res, data);
+}
+
 export default {
-  list
+  list,
+  create
 }

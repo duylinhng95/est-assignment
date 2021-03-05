@@ -3,7 +3,7 @@ import app from "../../app";
 import Event from "@Model/Event";
 import mongoose from 'mongoose';
 import moment from "moment";
-import User from "@Model/User";
+import getAuthTokenFromApi from "@Helper/helper-test";
 
 const request = supertest(app);
 let authToken: string;
@@ -48,7 +48,7 @@ beforeAll(async (done) => {
     }
   ];
   await Event.create(eventTestListing);
-  authToken = await getAuthTokenFromApi();
+  authToken = await getAuthTokenFromApi(request);
   done()
 });
 
@@ -78,18 +78,3 @@ describe('Event Listing Test', () => {
     done();
   })
 })
-
-async function getAuthTokenFromApi() {
-  const testUser = await User.findOne({username: 'testAuth'});
-  if (testUser) {
-    const response = await request.post('/auth/login')
-        .send({username: 'testAuth', password: 'testAuth'}).expect(200);
-
-    return response.body.data.token;
-  }
-
-  const response = await request.post('/auth/register')
-      .send({username: 'testAuth', password: 'testAuth'}).expect(200);
-
-  return response.body.data.token;
-}
